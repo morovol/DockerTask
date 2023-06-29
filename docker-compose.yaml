@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${NAME_BASE}
+      POSTGRES_USER: ${USER_BASE}
+      POSTGRES_PASSWORD: ${PASS_BASE}
+
+  keycloak:
+    image: jboss/keycloak
+    restart: always
+    links:
+      - postgres
+    ports:
+      - "8432:8080"
+    environment:
+      KEYCLOAK_USER: ${KEYCLOAK_USER}
+      KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_DATABASE: ${NAME_BASE}
+      DB_USER: ${USER_BASE}
+      DB_PASSWORD: ${PASS_BASE}
+  jenkins:
+    image: jenkins/jenkins
+    restart: always
+    ports:
+      - "8332:8080"
+      - "50000:50000"
+    volumes:
+      - ./jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
+#  sonarcube:
+#    image: sonarqube
+#    restart: always
+#    ports:
+#      - "9000:9000"
+
+volumes:
+  jenkins-data:
+

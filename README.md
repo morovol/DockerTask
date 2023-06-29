@@ -16,10 +16,10 @@
 as a result of work, provide a Dockerfile.
 
 # Implementation
-1. Installed Docker
-2-3. Created docker-compose.yaml
-4. Docker inspect <id_container>
-5. Create Dockerfile
-- docker build -t <name_image>:<tag>
-- docker push
-- hadolint <dockerfile_path>
+1. Installed Docker  
+2-3. Created docker-compose.yaml  
+4. Docker inspect <id_container>  
+5. Create Dockerfile  
+- docker build -t <name_image>:<tag>  
+- docker push  
+- hadolint <dockerfile_path>  

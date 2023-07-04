@@ -29,9 +29,8 @@ RUN curl -sL -o hadolint "https://github.com/hadolint/hadolint/releases/download
     chmod +x hadolint && \
     mv hadolint /usr/local/bin/
 # Install tfenv for Terraform version management
-RUN wget https://github.com/tfutils/tfenv/archive/refs/tags/$TFENV_VERSION.tar.gz && \
-    tar xf $TFENV_VERSION.tar.gz && \
-    mv tfenv-$TFENV_VERSION /opt/tfenv && \
+ADD https://github.com/tfutils/tfenv/archive/refs/tags/$TFENV_VERSION.tar.gz /opt/
+RUN mv tfenv-$TFENV_VERSION /opt/tfenv && \
     ln -s /opt/tfenv/bin/* /usr/local/bin
 # Set environment variables
 ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk
